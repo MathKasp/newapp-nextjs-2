@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"; 
 import { NavBar } from "@/components/navbar"
+import ReactQueryProvider from "@/components/queryClientProvider"
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
@@ -15,11 +16,12 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" themes={['light','dark','blue','red-orange']} enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" themes={['dark','blue','red-orange']} enableSystem disableTransitionOnChange>
 
-          <NavBar/>
-
-          {children}
+          <ReactQueryProvider>
+            <NavBar/>
+            {children}
+          </ReactQueryProvider>
 
         </ThemeProvider>
       </body>
